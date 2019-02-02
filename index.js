@@ -21,14 +21,6 @@ if(!db) {
    console.log("SHAME! Follow the intructions and set your DATABASE_URL correctly");
    process.exit(1);
 }
-
-
-
-
-
-
-
-
 /*
  * Return HTML for the / end point. 
  * This is a nice location to document your web service API
@@ -43,6 +35,22 @@ app.get("/", (req, res) => {
     }
     res.end(); //end the response
 });
+/*
+ * Hello world functions below...
+ */
+app.get("/hello", (req, res) => {
+    res.send({
+    message: "Hello, you sent a GET request" 
+    });
+   });
+   
+   
+   app.post("/hello", (req, res) => {
+    res.send({
+    message: "Hello, you sent a POST request"
+    });
+   }); 
+
 
 /* 
 * Heroku will assign a port you can use via the 'PORT' environment variable

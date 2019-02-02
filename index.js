@@ -45,10 +45,31 @@ app.get("/hello", (req, res) => {
    });
    
    
-   app.post("/hello", (req, res) => {
+app.post("/hello", (req, res) => {
     res.send({
-    message: "Hello, you sent a POST request"
+        message: "Hello, you sent a POST request"
     });
+});
+app.get("/params", (req, res) => {
+    res.send({
+    //req.query is a reference to arguments in the url
+    message: "Hello, " + req.query['name'] + "!"
+    });
+   });
+
+   app.post("/params", (req, res) => {
+    res.send({
+    //req.query is a reference to arguments in the POST body
+    message: "Hello, " + req.body['name'] + "! You sent a POST Request"
+    });
+   });
+   
+   app.get("/wait", (req, res) => {
+    setTimeout(() => {
+    res.send({
+    message: "Thanks for waiting"
+    });
+    }, 1000);
    }); 
 
 

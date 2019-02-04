@@ -5,11 +5,13 @@ const app = express();
 
 let middleware = require('./utilities/middleware');
 
-const bodyParser = require("body-parser");
-//This allows parsing of the body of POST requests, that are encoded in JSON
-app.use(bodyParser.json());
-
-
+app.use('/hello', require('./routes/hello.js'));
+app.use('/params', require('./routes/params.js'));
+app.use('/wait', require('./routes/wait.js'))
+app.use('/demosql', require('./routes/demosql.js'));
+app.use('/register', require('./routes/register.js'));
+app.use('/login', require('./routes/login.js'));
+app.use('/phish', middleware.checkToken, require('./routes/phish.js'));
 /*
  * Return HTML for the / end point. 
  * This is a nice location to document your web service API
@@ -26,14 +28,6 @@ app.get("/", (req, res) => {
     }
     res.end(); //end the response
 });
-
-app.use('/hello', require('./routes/hello.js'));
-app.use('/params', require('./routes/params.js'));
-app.use('/wait', require('./routes/wait.js'))
-app.use('/demosql', require('./routes/demosql.js'));
-app.use('/register', require('./routes/register.js'));
-app.use('/login', require('./routes/login.js'));
-app.use('/phish', middleware.checkToken, require('./routes/phish.js'));
 
 
 /* 

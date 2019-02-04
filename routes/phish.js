@@ -23,7 +23,7 @@ router.get("/blog/get", (req, res) => {
 			res.send(error);
 		} else {
 			// pass on everything (try out each of these in Postman to see the difference) 
-			res.send(response);
+			//res.send(response);
 			// or just pass on the body
 			res.send(body);
 		}

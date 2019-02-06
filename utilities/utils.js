@@ -14,7 +14,7 @@ function sendEmail(from, receiver, subj, message) {
   //make sure you add the password to the environmental variables
   //similar to the DATABASE_URL and PHISH_DOT_NET_KEY (later section of the lab)
 
-  var transporter = nodemailer.createTransport({
+  let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
            user: 'andyburner787@gmail.com',
@@ -22,7 +22,7 @@ function sendEmail(from, receiver, subj, message) {
        }
    });
 
-   const mailOptions = {
+   let mailOptions = {
     from: from, // sender address
     to: receiver, // list of receivers
     subject: subj, // Subject line
@@ -30,14 +30,16 @@ function sendEmail(from, receiver, subj, message) {
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
-    if(err)
-      console.log(err)
-    else
-      console.log(info);
+    if(err) {
+        console.log('Email sent: ' + message);
+        console.log(err)       
+    } else {
+        console.log('Email not sent');
+        console.log(info);    
+    }
  });
 
   //fake sending an email for now. Post a message to logs.
-  console.log('Email sent: ' + message);
 }
 /**
  * Method to get a salted hash.

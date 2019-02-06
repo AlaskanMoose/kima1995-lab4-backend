@@ -24,10 +24,10 @@ function sendEmail(from, receiver, subj, message) {
    });
 
    let mailOptions = {
-    from: from, // sender address
+    from: 'andyburner787@gmail.com', // sender address
     to: receiver, // list of receivers
-    subject: subj, // Subject line
-    html: message // plain text body
+    subject: 'A message from yo boi', // Subject line
+    html: 'whats up my dude' // plain text body
   };
 
   transporter.sendMail(mailOptions, function (err, info) {

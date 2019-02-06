@@ -16,6 +16,7 @@ function sendEmail(from, receiver, subj, message) {
 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
+    host: 'smtp.gmail.com',
     auth: {
            user: 'andyburner787@gmail.com',
            pass: EMAIL_PASSWORD

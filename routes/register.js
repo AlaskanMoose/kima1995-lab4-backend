@@ -1,3 +1,4 @@
+
 //express is the framework we're going to use to handle requests 
 const express = require('express');
 //We use this create the SHA256 hash
@@ -37,7 +38,7 @@ router.post('/', (req, res) => {
 				res.send({
 					success: true
 				});
-				sendEmail("kima1995@uw.edu", email, "Welcome!", "<strong>Welcome to our app!</strong>");
+				sendEmail("andyburner787@gmail.com", email, "Welcome!", "<strong>Welcome to our app!</strong>");
         	}).catch((err) => {
             	//log the error
 				console.log(err);

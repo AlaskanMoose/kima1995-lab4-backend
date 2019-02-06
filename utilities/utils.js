@@ -1,8 +1,11 @@
+const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+
 //Get the connection to Heroku Database
 let db = require('./sql_conn.js');
 
 //We use this create the SHA256 hash
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 function sendEmail(from, receiver, subj, message) {
   //research nodemailer for sending email from node.
   // https://nodemailer.com/about/
@@ -10,6 +13,30 @@ function sendEmail(from, receiver, subj, message) {
   //create a burner gmail account
   //make sure you add the password to the environmental variables
   //similar to the DATABASE_URL and PHISH_DOT_NET_KEY (later section of the lab)
+
+  let account = await nodemailer.createTestAccount();
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+           user: 'andyburner787@gmail.com',
+           pass: EMAIL_PASSWORD
+       }
+   });
+
+   const mailOptions = {
+    from: from, // sender address
+    to: receiver, // list of receivers
+    subject: subj, // Subject line
+    html: message // plain text body
+  };
+
+  transporter.sendMail(mailOptions, function (err, info) {
+    if(err)
+      console.log(err)
+    else
+      console.log(info);
+ });
+
   //fake sending an email for now. Post a message to logs.
   console.log('Email sent: ' + message);
 }

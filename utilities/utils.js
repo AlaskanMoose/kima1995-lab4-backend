@@ -14,7 +14,6 @@ function sendEmail(from, receiver, subj, message) {
   //make sure you add the password to the environmental variables
   //similar to the DATABASE_URL and PHISH_DOT_NET_KEY (later section of the lab)
 
-  let account = await nodemailer.createTestAccount();
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

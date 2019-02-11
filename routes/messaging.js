@@ -20,9 +20,7 @@ router.post("/send", (req, res) => {
 		return;
 	}
 	//add the message to the database
-	let insert = `INSERT INTO Messages(ChatId, Message, MemberId)
- SELECT $1, $2, MemberId FROM Members
- WHERE email=$3`
+	let insert = `INSERT INTO Messages(ChatId, Message, MemberId) SELECT $1, $2, MemberId FROM Members WHERE email=$3`
 	db.none(insert, [chatId, message, email])
 		.then(() => {
 			//send a notification of this message to ALL members with registered tokens
@@ -50,12 +48,7 @@ router.post("/send", (req, res) => {
 //Get all of the messages from a chat session with id chatid
 router.post("/getAll", (req, res) => {
 	let chatId = req.body['chatId'];
-	let query = `SELECT Members.Email, Messages.Message,
- to_char(Messages.Timestamp AT TIME ZONE 'PDT', 'YYYY-MM-DD HH24:MI:SS.US' ) AS Timestamp
- FROM Messages
- INNER JOIN Members ON Messages.MemberId=Members.MemberId
- WHERE ChatId=$1
- ORDER BY Timestamp DESC`
+	let query = `SELECT Members.Email, Messages.Message, to_char(Messages.Timestamp AT TIME ZONE 'PDT', 'YYYY-MM-DD HH24:MI:SS.US' ) AS Timestamp FROM Messages INNER JOIN Members ON Messages.MemberId=Members.MemberId WHERE ChatId=$1 ORDER BY Timestamp DESC`
 	db.manyOrNone(query, [chatId])
 		.then((rows) => {
 			res.send({

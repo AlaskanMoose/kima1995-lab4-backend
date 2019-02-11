@@ -32,10 +32,8 @@ function sendEmail(from, receiver, subj, message) {
 
   transporter.sendMail(mailOptions, function (err, info) {
     if(err) {
-        console.log('Email sent: ' + message);
         console.log(err)       
     } else {
-        console.log('Email not sent');
         console.log(info);    
     }
  });

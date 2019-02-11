@@ -6,11 +6,15 @@ var router = express.Router();
 router.get("/", (req, res) => {
     res.send({
         message: "Hello, you sent a GET request"
-}); });
+    });
+});
 //add a post route to the router.
 router.post("/", (req, res) => {
+    require('../utilities/utils').messaging
+        .sendToTopic('all', 'testing topic all', 'Testing');
     res.send({
         message: "Hello, you sent a POST request"
-}); });
+    });
+});
 // "return" the router
 module.exports = router;

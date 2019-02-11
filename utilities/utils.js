@@ -6,6 +6,7 @@ let db = require('./sql_conn.js');
 //We use this create the SHA256 hash
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+
 function sendEmail(from, receiver, subj, message) {
   //research nodemailer for sending email from node.
   // https://nodemailer.com/about/
@@ -18,12 +19,12 @@ function sendEmail(from, receiver, subj, message) {
     service: 'gmail',
     host: 'smtp.gmail.com',
     auth: {
-           user: 'andyburner787@gmail.com',
-           pass: EMAIL_PASSWORD
-       }
-   });
+      user: 'andyburner787@gmail.com',
+      pass: EMAIL_PASSWORD
+    }
+  });
 
-   let mailOptions = {
+  let mailOptions = {
     from: 'andyburner787@gmail.com', // sender address
     to: receiver, // list of receivers
     subject: 'A message from yo boi', // Subject line
@@ -31,12 +32,12 @@ function sendEmail(from, receiver, subj, message) {
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
-    if(err) {
-        console.log(err)       
+    if (err) {
+      console.log(err)
     } else {
-        console.log(info);    
+      console.log(info);
     }
- });
+  });
 
   //fake sending an email for now. Post a message to logs.
 }
@@ -47,11 +48,14 @@ function sendEmail(from, receiver, subj, message) {
  * @param {string} salt the salt to use when hashing
  */
 function getHash(pw, salt) {
-    return crypto.createHash("sha256").update(pw + salt).digest("hex");
+  return crypto.createHash("sha256").update(pw + salt).digest("hex");
 }
 
-
+let messaging = require('./pushy_services.js');
 
 module.exports = {
-    db, getHash, sendEmail
+  db,
+  getHash,
+  sendEmail,
+  messaging
 };
